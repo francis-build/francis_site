@@ -22,7 +22,8 @@ defmodule FrancisSite.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:francis_htmx, "~> 0.1"},
+      {:francis, "~> 0.3"},
+      {:tailwind, "~> 0.4", runtime: Mix.env() == :dev},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end

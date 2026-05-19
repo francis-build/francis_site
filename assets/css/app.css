@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@source "../../priv/static/**/*.html";
+
+@theme {
+  --color-hat: oklch(22% 0.015 230);
+  --color-hat-subtle: oklch(96.5% 0.008 230);
+  --font-display: 'Nunito', system-ui, sans-serif;
+}
+
+/* Prevent highlight.js from creating a nested scroll context inside <pre> */
+.hljs {
+  overflow-x: visible;
+  background: transparent;
+  padding: 0;
+}
