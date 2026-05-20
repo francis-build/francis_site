@@ -16,14 +16,14 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Francis - DSL for your Elixir web application">
   <meta property="og:description" content="A lightweight DSL for building Elixir web applications with HTTP actions, WebSockets, static content serving, and more.">
-  <meta property="og:image" content="https://francis.build/ogp.png">
+  <meta property="og:image" content="https://francis.build<%= ogp_png %>">
   <meta property="og:site_name" content="Francis">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:domain" content="francis.build">
   <meta property="twitter:url" content="https://francis.build">
   <meta name="twitter:title" content="Francis - DSL for your Elixir web application">
   <meta name="twitter:description" content="A lightweight DSL for building Elixir web applications with HTTP actions, WebSockets, static content serving, and more.">
-  <meta name="twitter:image" content="https://francis.build/ogp.png">
+  <meta name="twitter:image" content="https://francis.build<%= ogp_png %>">
 </head>
 <body class="bg-white text-gray-900 antialiased selection:bg-hat selection:text-white">
 

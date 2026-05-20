@@ -8,7 +8,8 @@ defmodule FrancisSite do
       |> EEx.eval_file(
         tw_css: Francis.Static.static_path("tw.css"),
         icon_png: Francis.Static.static_path("icon.png"),
-        favicon_ico: Francis.Static.static_path("favicon.ico")
+        favicon_ico: Francis.Static.static_path("favicon.ico"),
+        ogp_png: Francis.Static.static_path("ogp.png")
       )
 
     html(conn, html)
