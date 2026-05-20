@@ -1,0 +1,66 @@
+{
+  "files": {
+    "cache_manifest-3ca8a1a934fa.json": {
+      "size": 1113,
+      "mtime": "2026-05-20T10:19:09",
+      "digest": "3ca8a1a934fa",
+      "digested_path": "cache_manifest-3ca8a1a934fa-3ca8a1a934fa.json",
+      "gzipped": {
+        "size": 330,
+        "path": "cache_manifest-3ca8a1a934fa-3ca8a1a934fa.json.gz"
+      }
+    },
+    "cache_manifest-3ca8a1a934fa.json.gz": {
+      "size": 330,
+      "mtime": "2026-05-20T10:19:09",
+      "digest": "9440d27b448c",
+      "digested_path": "cache_manifest-3ca8a1a934fa.json-9440d27b448c.gz",
+      "gzipped": {
+        "size": 353,
+        "path": "cache_manifest-3ca8a1a934fa.json-9440d27b448c.gz.gz"
+      }
+    },
+    "favicon.ico": {
+      "size": 115453,
+      "mtime": "2026-05-19T16:09:05",
+      "digest": "a67ceeeba4bc",
+      "digested_path": "favicon-a67ceeeba4bc.ico",
+      "gzipped": {
+        "size": 26193,
+        "path": "favicon-a67ceeeba4bc.ico.gz"
+      }
+    },
+    "icon.png": {
+      "size": 79365,
+      "mtime": "2026-05-19T16:09:05",
+      "digest": "716767de04c0",
+      "digested_path": "icon-716767de04c0.png",
+      "gzipped": {
+        "size": 77529,
+        "path": "icon-716767de04c0.png.gz"
+      }
+    },
+    "ogp.png": {
+      "size": 105360,
+      "mtime": "2026-05-19T16:09:05",
+      "digest": "ef352393e921",
+      "digested_path": "ogp-ef352393e921.png",
+      "gzipped": {
+        "size": 93230,
+        "path": "ogp-ef352393e921.png.gz"
+      }
+    },
+    "tw.css": {
+      "size": 18051,
+      "mtime": "2026-05-20T10:09:07",
+      "digest": "41634fc9c7e8",
+      "digested_path": "tw-41634fc9c7e8.css",
+      "gzipped": {
+        "size": 3947,
+        "path": "tw-41634fc9c7e8.css.gz"
+      }
+    }
+  },
+  "generated_at": "2026-05-20T11:00:21.277162Z",
+  "version": 1
+}
