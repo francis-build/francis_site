@@ -24,3 +24,16 @@ francis_site-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Tailwind generated output and digested static assets
+/priv/static/tw.css
+/priv/static/tw.css.gz
+/priv/static/cache_manifest.json
+/priv/static/*-*.css
+/priv/static/*-*.css.gz
+/priv/static/*-*.ico
+/priv/static/*-*.ico.gz
+/priv/static/*-*.png
+/priv/static/*-*.png.gz
+/priv/static/*-*.html
+/priv/static/*-*.html.gz

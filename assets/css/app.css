@@ -1,10 +1,17 @@
 @import "tailwindcss";
-@source "../../priv/static/**/*.html";
+@source "../../priv/templates/index.html.eex";
 
 @theme {
   --color-hat: oklch(22% 0.015 230);
   --color-hat-subtle: oklch(96.5% 0.008 230);
   --font-display: 'Nunito', system-ui, sans-serif;
+}
+
+@layer components {
+  .primitive-row    { @apply flex flex-col sm:flex-row sm:items-start sm:gap-8; }
+  .primitive-label  { @apply font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3; }
+  .primitive-code   { @apply bg-gray-50 ring-1 ring-gray-200 rounded-xl p-2 text-xs overflow-x-auto; }
+  .primitive-note   { @apply font-display text-xs text-gray-500 leading-relaxed mt-2; }
 }
 
 /* Prevent highlight.js from creating a nested scroll context inside <pre> */

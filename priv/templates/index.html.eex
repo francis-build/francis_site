@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="<%= tw_css %>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="<%= favicon_ico %>">
 
   <meta name="description" content="A lightweight DSL for building Elixir web applications with HTTP actions, WebSockets, static content serving, and more.">
   <meta property="og:url" content="https://francis.build">
@@ -29,9 +29,9 @@
 
   <!-- Hero: warm light tint, hat stays visible -->
   <header class="bg-hat-subtle">
-    <div class="max-w-3xl mx-auto px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="max-w-4xl mx-auto px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
       <div class="flex items-center gap-4 mb-8">
-        <img src="/icon.png" class="w-[2rem] h-auto" alt="" aria-hidden="true">
+        <img src="<%= icon_png %>" class="w-[2rem] h-auto" alt="" aria-hidden="true">
         <h1 class="font-mono text-4xl font-bold text-hat">Francis</h1>
         <span id="version-pill" class="font-mono text-xs text-gray-700 bg-white/70 px-2 py-0.5 rounded-full ring-1 ring-gray-200"></span>
       </div>
@@ -61,7 +61,7 @@
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-6">
+  <main class="max-w-4xl mx-auto px-6">
 
     <!-- Get started + Deploy: two-up on desktop, stacked mobile -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-14 pb-12">
@@ -71,12 +71,12 @@
           <h2 class="font-mono text-xs font-semibold uppercase tracking-widest text-gray-700">Get started</h2>
           <span class="font-mono text-xs text-gray-700">~30 sec</span>
         </div>
-        <div class="relative group">
-          <pre class="bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-sm overflow-x-auto" tabindex="0"><code class="language-bash">mix archive.install hex francis
+        <div class="relative">
+          <pre class="bg-gray-50 ring-1 ring-gray-200 rounded-xl p-4 text-sm overflow-x-auto" tabindex="0"><code class="language-bash">mix archive.install hex francis
 mix francis.new my_app</code></pre>
           <button
             onclick="navigator.clipboard.writeText(this.closest('div').querySelector('code').textContent.trim()); this.textContent='copied'; setTimeout(() => this.textContent='copy', 2000)"
-            class="absolute top-2.5 right-2.5 font-mono text-xs text-gray-700 hover:text-gray-900 bg-white ring-1 ring-gray-200 rounded px-2 py-1 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity cursor-pointer"
+            class="absolute top-2.5 right-2.5 font-mono text-xs text-gray-700 hover:text-gray-900 bg-white ring-1 ring-gray-200 rounded px-2 py-1 cursor-pointer"
             aria-label="Copy install commands to clipboard">copy</button>
         </div>
       </div>
@@ -86,12 +86,12 @@ mix francis.new my_app</code></pre>
           <h2 class="font-mono text-xs font-semibold uppercase tracking-widest text-gray-700">Deploy</h2>
           <span class="font-mono text-xs text-gray-700">~2 min</span>
         </div>
-        <div class="relative group">
-          <pre class="bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-sm overflow-x-auto" tabindex="0"><code class="language-bash">mix francis.release
+        <div class="relative">
+          <pre class="bg-gray-50 ring-1 ring-gray-200 rounded-xl p-4 text-sm overflow-x-auto" tabindex="0"><code class="language-bash">mix francis.release
 fly launch</code></pre>
           <button
             onclick="navigator.clipboard.writeText(this.closest('div').querySelector('code').textContent.trim()); this.textContent='copied'; setTimeout(() => this.textContent='copy', 2000)"
-            class="absolute top-2.5 right-2.5 font-mono text-xs text-gray-700 hover:text-gray-900 bg-white ring-1 ring-gray-200 rounded px-2 py-1 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity cursor-pointer"
+            class="absolute top-2.5 right-2.5 font-mono text-xs text-gray-700 hover:text-gray-900 bg-white ring-1 ring-gray-200 rounded px-2 py-1 cursor-pointer"
             aria-label="Copy deploy commands to clipboard">copy</button>
         </div>
       </div>
@@ -104,38 +104,69 @@ fly launch</code></pre>
     <section class="pt-14 pb-16">
       <div class="flex items-baseline justify-between mb-8">
         <h2 class="font-mono text-xs font-semibold uppercase tracking-widest text-gray-700">What you can build</h2>
-        <span class="font-mono text-xs text-gray-700">4 primitives</span>
+        <span class="font-mono text-xs text-gray-700">6 primitives</span>
       </div>
 
-      <!-- All four features: label-left + code-right -->
       <div class="space-y-5">
 
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8">
-          <p class="font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3">HTTP Actions</p>
-          <pre class="flex-1 bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-xs overflow-x-auto" tabindex="0"><code class="language-elixir">get "/hello", fn _ -> %{hello: :world} end
+        <div class="primitive-row">
+          <p class="primitive-label">HTTP Actions</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">get "/hello", fn _ -> %{hello: :world} end
 get "/:name", fn %{params: params} -> params["name"] end
 post "/", fn conn -> conn.body_params end</code></pre>
+            <p class="primitive-note">Returns strings as HTML, maps as JSON. URL params, body, and the raw conn always available.</p>
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8">
-          <p class="font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3">WebSockets</p>
-          <pre class="flex-1 bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-xs overflow-x-auto" tabindex="0"><code class="language-elixir">ws "/chat", fn
+        <div class="primitive-row">
+          <p class="primitive-label">WebSockets</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">ws "/chat", fn
   :join, socket -> {:reply, "welcome"}
   {:received, msg}, _ -> {:reply, msg}
 end</code></pre>
+            <p class="primitive-note">Pattern match on join, close, and incoming messages. Heartbeat and frame size limits included.</p>
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8">
-          <p class="font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3">Server-Sent Events</p>
-          <pre class="flex-1 bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-xs overflow-x-auto" tabindex="0"><code class="language-elixir">sse "/events", fn
+        <div class="primitive-row">
+          <p class="primitive-label">Server-Sent Events</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">sse "/events", fn
   :join, socket -> {:reply, socket.id}
   {:received, m}, _ -> {:reply, m}
 end</code></pre>
+            <p class="primitive-note">Push from any process via <code class="font-mono">send/2</code>. Named events, retry, and keepalive managed for you.</p>
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8">
-          <p class="font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3">Static Files</p>
-          <pre class="flex-1 bg-gray-50 ring-1 ring-gray-200 rounded-lg p-4 text-xs overflow-x-auto" tabindex="0"><code class="language-elixir">use Francis, static: [ from: "priv/static", at: "/" ]</code></pre>
+        <div class="primitive-row">
+          <p class="primitive-label">Static Files</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">use Francis, static: [ from: "priv/static", at: "/" ]</code></pre>
+            <p class="primitive-note">Serve from disk with gzip. Run <code class="font-mono">mix francis.digest</code> for content-hashed filenames and a cache manifest.</p>
+          </div>
+        </div>
+
+        <div class="primitive-row">
+          <p class="primitive-label">Security</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">plug Francis.Plug.SecureHeaders
+plug Francis.Plug.CSP, directives: %{script_src: ["'self'"]}
+safe_html conn, user_content  # auto-escapes &lt;&gt;&amp;&quot;'</code></pre>
+            <p class="primitive-note">Secure headers and CSP with safe defaults. Open redirects blocked in response helpers by design.</p>
+          </div>
+        </div>
+
+        <div class="primitive-row">
+          <p class="primitive-label">Plug Ecosystem</p>
+          <div class="flex-1 min-w-0">
+            <pre class="primitive-code" tabindex="0"><code class="language-elixir">plug Plug.BasicAuth, username: "user", password: "pass"
+plug Plug.Logger
+plug MyApp.RateLimiter</code></pre>
+            <p class="primitive-note">Any standard Plug middleware works. No lock-in, no adapters needed.</p>
+          </div>
         </div>
 
       </div>
@@ -146,7 +177,7 @@ end</code></pre>
     <!-- Honest disclaimer: practice what you preach -->
     <section class="py-12">
       <h2 class="font-mono text-xs font-semibold uppercase tracking-widest text-gray-700 mb-4">Honest about scope</h2>
-      <p class="font-display text-base text-gray-700 leading-relaxed max-w-2xl">
+      <p class="font-display text-base text-gray-700 leading-relaxed">
         Francis is a thin DSL on top of Plug and Bandit. If you need ORMs, generators, live views, or a full asset pipeline,
         reach for <a href="https://www.phoenixframework.org" class="text-gray-900 underline decoration-gray-400 underline-offset-4 hover:decoration-gray-900 transition-colors" target="_blank" rel="noopener">Phoenix</a>.
         If you want to ship a small HTTP service in an afternoon, you are in the right place.
@@ -156,9 +187,8 @@ end</code></pre>
   </main>
 
   <footer class="border-t border-gray-200">
-    <div class="max-w-3xl mx-auto px-6 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div class="flex items-center gap-2.5">
-        <img src="/icon.png" class="w-5 h-5" alt="" aria-hidden="true">
         <span class="font-mono text-sm font-semibold text-gray-900">Francis</span>
         <span class="font-display text-sm text-gray-700">&middot; MIT licensed</span>
       </div>
