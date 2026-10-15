@@ -37,3 +37,5 @@ francis_site-*.tar
 /priv/static/*-*.png.gz
 /priv/static/*-*.html
 /priv/static/*-*.html.gz
+/priv/static/cache_manifest*
+/priv/static/*.gz

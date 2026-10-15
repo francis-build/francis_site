@@ -29,7 +29,7 @@ defmodule FrancisSite.MixProject do
 
   defp deps do
     [
-      {:francis, "~> 0.3.3"},
+      {:francis, "~> 0.4"},
       {:tailwind, "~> 0.4", runtime: Mix.env() == :dev},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]

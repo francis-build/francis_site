@@ -1,6 +1,5 @@
 import Config
 
-config :francis, watcher: true
 config :logger, level: :debug
 
 config :tailwind,
