@@ -25,17 +25,10 @@ francis_site-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
-# Tailwind generated output and digested static assets
+# Tailwind output and everything mix francis.digest generates: hashed copies
+# (any name with a dash; source assets are named without one), gzip variants
+# and the manifest.
 /priv/static/tw.css
-/priv/static/tw.css.gz
-/priv/static/cache_manifest.json
-/priv/static/*-*.css
-/priv/static/*-*.css.gz
-/priv/static/*-*.ico
-/priv/static/*-*.ico.gz
-/priv/static/*-*.png
-/priv/static/*-*.png.gz
-/priv/static/*-*.html
-/priv/static/*-*.html.gz
+/priv/static/**/*-*
+/priv/static/**/*.gz
 /priv/static/cache_manifest*
-/priv/static/*.gz
