@@ -1,5 +1,5 @@
 defmodule FrancisSite do
-  use Francis, static: [at: "/", from: "priv/static"]
+  use Francis, static: [at: "/", from: "priv/static", gzip: true]
 
   get("/", fn conn ->
     html =

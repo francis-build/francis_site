@@ -115,7 +115,7 @@ fly launch</code></pre>
             <pre class="primitive-code" tabindex="0"><code class="language-elixir">get "/hello", fn _ -> %{hello: :world} end
 get "/:name", fn %{params: params} -> params["name"] end
 post "/", fn conn -> conn.body_params end</code></pre>
-            <p class="primitive-note">Returns strings as HTML, maps as JSON. URL params, body, and the raw conn always available.</p>
+            <p class="primitive-note">Maps become JSON, strings are sent as-is &mdash; use <code class="font-mono">html/2</code> or <code class="font-mono">text/2</code> to set the type. URL params, body, and the raw conn always available.</p>
           </div>
         </div>
 
@@ -126,7 +126,7 @@ post "/", fn conn -> conn.body_params end</code></pre>
   :join, socket -> {:reply, "welcome"}
   {:received, msg}, _ -> {:reply, msg}
 end</code></pre>
-            <p class="primitive-note">Pattern match on join, close, and incoming messages. Heartbeat and frame size limits included.</p>
+            <p class="primitive-note">Pattern match on join, close, incoming frames, and messages from other processes. Heartbeat and frame size limits included.</p>
           </div>
         </div>
 
@@ -153,7 +153,7 @@ end</code></pre>
           <p class="primitive-label">Security</p>
           <div class="flex-1 min-w-0">
             <pre class="primitive-code" tabindex="0"><code class="language-elixir">plug Francis.Plug.SecureHeaders
-plug Francis.Plug.CSP, directives: %{script_src: ["'self'"]}
+plug Francis.Plug.CSP, directives: %{"script-src" =&gt; "'self'"}
 safe_html conn, user_content  # auto-escapes &lt;&gt;&amp;&quot;'</code></pre>
             <p class="primitive-note">Secure headers and CSP with safe defaults. Open redirects blocked in response helpers by design.</p>
           </div>
