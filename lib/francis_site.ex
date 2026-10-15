@@ -2,13 +2,19 @@ defmodule FrancisSite do
   use Francis, static: [at: "/", from: "priv/static", gzip: true]
 
   # The page advertises these plugs, so it is served with them. Every asset is
-  # self-hosted, which is exactly what the default CSP ('self' only) allows.
+  # self-hosted; the only outside origins are for Cloudflare Web Analytics,
+  # whose beacon Cloudflare injects into the page at its proxy.
   # HSTS drops includeSubDomains: it would also bind other francis.build hosts.
   plug(Francis.Plug.SecureHeaders,
     headers: %{"strict-transport-security" => "max-age=63072000"}
   )
 
-  plug(Francis.Plug.CSP)
+  plug(Francis.Plug.CSP,
+    directives: %{
+      "script-src" => "'self' https://static.cloudflareinsights.com",
+      "connect-src" => "'self' https://cloudflareinsights.com"
+    }
+  )
 
   get("/", fn conn ->
     html =
