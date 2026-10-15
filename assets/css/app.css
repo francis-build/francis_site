@@ -1,22 +1,66 @@
 @import "tailwindcss";
 @source "../../priv/templates/index.html.eex";
 
+/* Self-hosted so the page needs no third-party requests (and fits the
+   default Francis.Plug.CSP policy). One variable file covers 400 and 700. */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/nunito.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
 @theme {
   --color-hat: oklch(22% 0.015 230);
   --color-hat-subtle: oklch(96.5% 0.008 230);
   --font-display: 'Nunito', system-ui, sans-serif;
 }
 
+/* Scroll shadows: a soft edge appears on the side that has more code, so a
+   clipped line on a phone reads as "scrolls" instead of "cut off". */
+@utility code-scroll {
+  background:
+    linear-gradient(to right, var(--color-gray-50) 40%, transparent) left / 2rem 100% no-repeat local,
+    linear-gradient(to left, var(--color-gray-50) 40%, transparent) right / 2rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, oklch(22% 0.015 230 / 0.16), transparent) left / 0.6rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, oklch(22% 0.015 230 / 0.16), transparent) right / 0.6rem 100% no-repeat scroll,
+    var(--color-gray-50);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) transparent;
+}
+
 @layer components {
   .primitive-row    { @apply flex flex-col sm:flex-row sm:items-start sm:gap-8; }
   .primitive-label  { @apply font-mono text-sm font-semibold text-gray-900 sm:w-40 flex-shrink-0 mb-2 sm:mb-0 sm:pt-3; }
-  .primitive-code   { @apply bg-gray-50 ring-1 ring-gray-200 rounded-xl p-2 text-xs overflow-x-auto; }
-  .primitive-note   { @apply font-display text-xs text-gray-500 leading-relaxed mt-2; }
+  .primitive-code   { @apply code-scroll ring-1 ring-gray-200 rounded-xl p-3 text-xs overflow-x-auto; }
+  .primitive-note   { @apply font-display text-sm text-gray-700 leading-relaxed mt-2 max-w-prose; }
+  .primitive-note code { @apply whitespace-nowrap; }
+  .code-block       { @apply code-scroll ring-1 ring-gray-200 rounded-xl p-4 text-sm overflow-x-auto; }
+  .copy-button      { @apply absolute top-1.5 right-1.5 inline-flex items-center justify-center min-h-11 min-w-11 px-3 font-mono text-xs text-gray-700 hover:text-gray-900 bg-white ring-1 ring-gray-200 rounded-lg cursor-pointer; }
+  .text-link        { @apply text-gray-900 underline decoration-gray-400 underline-offset-4 hover:decoration-gray-900 transition-colors; }
 }
 
-/* Prevent highlight.js from creating a nested scroll context inside <pre> */
-.hljs {
-  overflow-x: visible;
-  background: transparent;
-  padding: 0;
+/* Syntax colours: the GitHub light palette, darkened per hue to reach
+   WCAG AAA (>= 7:1) on the gray-50 code surface. Replaces the CDN theme,
+   whose rules used to override the reset above and draw a box in a box. */
+pre code.hljs { display: block; overflow-x: visible; padding: 0; background: transparent; color: #24292e; }
+.hljs-keyword, .hljs-doctag, .hljs-template-tag, .hljs-type, .hljs-variable.language_ { color: #9b2a35; }
+.hljs-title, .hljs-title.class_, .hljs-title.function_ { color: #643bae; }
+.hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-variable, .hljs-section { color: #0051ad; }
+.hljs-string, .hljs-regexp { color: #032f62; }
+.hljs-built_in, .hljs-symbol { color: #8a3c05; }
+.hljs-comment, .hljs-code { color: #4e555d; }
+.hljs-name, .hljs-quote, .hljs-selector-tag { color: #18602a; }
+
+:where(a, button, pre, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-hat);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; }
 }
